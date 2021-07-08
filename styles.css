@@ -63,6 +63,9 @@ body ol {
 }
 
 @media print {
+    body {
+        color: black;
+    }
     .print-invisible {
         display: none;
     }
