@@ -1,55 +1,57 @@
 body {
-  background-color: #53a8e6;
+    background-image: url("motoerbeer.jpeg");
+    background-size: auto;
+    color: red;
 }
+
 body h1 {
-  text-align: center;
-  font-family: 'Arial', sans-serif;
-  color: white;
-  font-size: 50px;
-  font-weight: normal;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 50px;
+    font-weight: normal;
 }
+
 body .list {
-  width: 250px;
-  margin: 10px auto;
+    width: 250px;
+    margin: 10px auto;
 }
-body .list ::-webkit-input-placeholder {
-  color: #cecece;
-}
+
+
 body .list .input {
-  outline: none;
-  border: 1px solid white;
-  background-color: #53a8e6;
-  color: white;
-  height: 50px;
-  width: 250px;
-  padding-left: 10px;
-  font-family: 'Arial', sans-serif;
-  font-weight: 800;
-  font-size: 16px;
-  margin-left: -5px;
+    outline: none;
+    border: 1px solid white;
+    background-color: white;
+    height: 50px;
+    width: 250px;
+    padding-left: 10px;
+    font-family: 'Arial', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    margin-left: -5px;
 }
+
 body .list span {
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-size: 30px;
-  font-weight: 800;
-  line-height: 1.8;
-  cursor: pointer;
-  transition: all 200ms;
-  color: white;
-  will-change: transform;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.8;
+    cursor: pointer;
+    transition: all 200ms;
+    will-change: transform;
 }
 
 .add.input {
-  margin: 10px;
+    margin: 10px;
 }
 
 body .list span:hover {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
+
 body ol {
-  padding: 0;
+    padding: 0;
 }
 
 #file-input {
@@ -57,65 +59,65 @@ body ol {
 }
 
 .numbering-exclude {
-  display: block;
+    display: block;
 }
 
 @media print {
-  .print-invisible {
-    display: none;
-  }
+    .print-invisible {
+        display: none;
+    }
 
-  .print-invisible > * {
-    display: none;
-  }
-  
-  body ol .draggable {
-    margin: 0 auto;
-    line-height: 1.5;
-    height: auto;
-    list-style-type: unset;
-    font-weight: 800;
-    font-size: 20px;
-  }
+    .print-invisible > * {
+        display: none;
+    }
+
+    body ol .draggable {
+        margin: 0 auto;
+        line-height: 1.5;
+        height: auto;
+        list-style-type: unset;
+        font-weight: 800;
+        font-size: 20px;
+    }
 }
 
 
 .center {
-  text-align: center;
+    text-align: center;
 }
 
 .centerflex {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 [draggable] {
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-user-drag: element;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: element;
 }
 
 .draggable {
-  padding-bottom: 5px;
-  padding-top: 5px;
-  text-align: center;
-  cursor: move;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    cursor: move;
 }
 
 .draggable.dragElem {
-  opacity: 0.4;
+    opacity: 0.4;
 }
 
 .draggable.over {
-  border-top: 2px solid blue;
+    border-top: 2px solid blue;
 }
 
 div {
-  margin: 10px;
+    margin: 10px;
 }
 
 
 label {
-  margin: 10px;
+    margin: 10px;
 }
