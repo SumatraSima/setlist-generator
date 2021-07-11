@@ -10,31 +10,30 @@
 
 <body>
 <h1 class="print-invisible">Motörbeer Setlist Generator</h1>
-<div class="center print-invisible">
+<div class="setlist-upload-download-section print-invisible">
     <div>
-        <button type="button" id="import-pfx-button" onclick="selectFileForImport()">Import
-            Setlist
-            from file...
+        <button type="button" id="select-file-button">
+            Import Setlist  from file...
         </button>
-        <input type="file" id="file-input" onchange="handleFileSelect(event)"/>
+        <input type="file" id="file-input"/>
     </div>
     <div>
-        <form onsubmit="download(event)">
-            <label for="setlistName" style="display: block">
+        <form id="download-form">
+            <label for="setlist-file-name-input" style="display: block">
                 Specify a name for the setlist
             </label>
-            <input id="setlistName" type="text" class="input" placeholder="Give a name for the setlist file"/>
+            <input id="setlist-file-name-input" type="text" placeholder="Give a name for the setlist file"/>
             <input type="submit" value="Download">
         </form>
     </div>
 </div>
-<div class="list print-invisible">
-    <label for="addItem">
+<div class="song-add-section print-invisible">
+    <label for="setlist-name-input">
         Add songs to the setlist here
     </label>
-    <input id="addItem" type="text" class="add input" placeholder="Add items in your list">
+    <input id="setlist-name-input" type="text" placeholder="Add items in your list">
 </div>
-<div class="centerflex">
+<div class="setlist-container">
     <ol id="setlist">
     </ol>
 </div>

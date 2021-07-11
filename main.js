@@ -1,11 +1,13 @@
+const windowsLineSeparator = '\r\n';
+const unixLineSeparator = '\n';
+
 let dragSrcEl = null;
 
 function handleDragStart(e) {
     dragSrcEl = this;
-
     e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', this.outerHTML);
 
+    e.dataTransfer.setData('text/html', this.outerHTML);
     this.classList.add('dragElem');
 }
 
@@ -18,13 +20,11 @@ function handleDragOver(e) {
     return false;
 }
 
-
 function handleDragLeave() {
     this.classList.remove('over');
 }
 
 function handleDrop(e) {
-
     if (e.stopPropagation) {
         e.stopPropagation();
     }
@@ -36,22 +36,24 @@ function handleDrop(e) {
         const dropElem = this.previousSibling;
         addDragAndDropHandlers(dropElem);
     }
+
     this.classList.remove('over');
     this.classList.remove('dragElem')
     return false;
+
 }
 
 function handleDragEnd() {
     this.classList.remove('over');
 }
 
+// TODO do event handling on document level?
 function addDragAndDropHandlers(elem) {
     elem.addEventListener('dragstart', handleDragStart, false);
     elem.addEventListener('dragover', handleDragOver, false);
     elem.addEventListener('dragleave', handleDragLeave, false);
     elem.addEventListener('drop', handleDrop, false);
     elem.addEventListener('dragend', handleDragEnd, false);
-
 }
 
 const cols = document.querySelectorAll('.draggable');
@@ -72,6 +74,7 @@ function handleFileSelect(e) {
     reader.onload = onFileLoaded;
     //TODO handle invalid file formats
     reader.readAsText(file);
+
 }
 
 function onFileLoaded(e) {
@@ -81,25 +84,10 @@ function onFileLoaded(e) {
     ol.innerHTML = '';
     for (const line of lines) {
         if (line && line.trim().length !== 0) {
-            const node = document.createElement("li");
-            node.classList.add('draggable');
-            if (line.startsWith('---')) {
-                node.classList.add('numbering-exclude')
-            }
-            const attr = document.createAttribute('draggable');
-            attr.value = 'true';
-            node.setAttributeNode(attr);
-            const textNode = document.createTextNode(line);
-            node.appendChild(textNode);
-            ol.appendChild(node);
-            addDragAndDropHandlers(node);
+            addNewSong(line);
         }
     }
 }
-
-
-const windowsLineSeparator = '\r\n';
-const unixLineSeparator = '\n';
 
 function getLineSeparator(content = '') {
     let lineSeparator = unixLineSeparator;
@@ -110,7 +98,7 @@ function getLineSeparator(content = '') {
 }
 
 function download(e) {
-    const filename = '' + document.getElementById('setlistName').value + '.txt';
+    const filename = '' + document.getElementById('setlist-file-name-input').value + '.txt';
     e.preventDefault();
     const list = document.getElementById('setlist');
     let text = '';
@@ -130,34 +118,37 @@ function download(e) {
     document.body.removeChild(element);
 }
 
-function addNewSong(newItem) {
+function addNewSong(songTitle) {
     const li = document.createElement('li');
     const attr = document.createAttribute('draggable');
     const ol = document.querySelector('ol');
     li.classList.add('draggable');
+    if (songTitle.startsWith('---')) {
+        li.classList.add('numbering-exclude')
+    }
     attr.value = 'true';
     li.setAttributeNode(attr);
-    li.appendChild(document.createTextNode(newItem));
+    li.appendChild(document.createTextNode(songTitle));
     ol.appendChild(li);
     addDragAndDropHandlers(li);
 }
 
-function addNewItem() {
-    const songTitle = document.querySelector('.add.input').value;
-    if (songTitle !== '') {
-        addNewSong(songTitle);
-    }
-    document.querySelector('.input').value = '';
-}
-
-const addInput = document.querySelector('.input.add');
-addInput.addEventListener("keyup", function (event) {
-    if (event.keyCode === 13) {
-        addNewItem();
+document.getElementById('setlist-name-input').addEventListener("keyup", function (event) {
+    let inputValue = event.target.value;
+    if (event.code === 'Enter' && inputValue !== '') {
+        addNewSong(inputValue);
         event.target.value = '';
     }
-
 });
+
+document.getElementById('select-file-button')
+    .addEventListener('click', selectFileForImport);
+
+document.getElementById('file-input')
+    .addEventListener('change', handleFileSelect);
+
+document.getElementById('download-form')
+    .addEventListener('submit', download);
 
 [
     'Gonna Leave You',

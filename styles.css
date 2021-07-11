@@ -4,20 +4,19 @@ body {
     color: red;
 }
 
-body h1 {
+ h1 {
     text-align: center;
     font-family: 'Arial', sans-serif;
     font-size: 50px;
     font-weight: normal;
 }
 
-body .list {
+.song-add-section {
     width: 250px;
     margin: 10px auto;
 }
 
-
-body .list .input {
+.song-add-section input {
     outline: none;
     border: 1px solid white;
     background-color: white;
@@ -30,30 +29,6 @@ body .list .input {
     margin-left: -5px;
 }
 
-body .list span {
-    position: absolute;
-    right: 0;
-    top: 0;
-    font-size: 30px;
-    font-weight: 800;
-    line-height: 1.8;
-    cursor: pointer;
-    transition: all 200ms;
-    will-change: transform;
-}
-
-.add.input {
-    margin: 10px;
-}
-
-body .list span:hover {
-    transform: rotate(180deg);
-}
-
-body ol {
-    padding: 0;
-}
-
 #file-input {
     display: none;
 }
@@ -62,34 +37,11 @@ body ol {
     display: block;
 }
 
-@media print {
-    body {
-        color: black;
-    }
-    .print-invisible {
-        display: none;
-    }
-
-    .print-invisible > * {
-        display: none;
-    }
-
-    body ol .draggable {
-        margin: 0 auto;
-        line-height: 1.5;
-        height: auto;
-        list-style-type: unset;
-        font-weight: 800;
-        font-size: 20px;
-    }
-}
-
-
-.center {
+.setlist-upload-download-section {
     text-align: center;
 }
 
-.centerflex {
+.setlist-container {
     display: flex;
     justify-content: center;
 }
@@ -113,14 +65,27 @@ body ol {
 }
 
 .draggable.over {
-    border-top: 2px solid blue;
+    border-top: 2px solid red;
 }
 
-div {
-    margin: 10px;
-}
+@media print {
+    body {
+        color: black;
+    }
+    .print-invisible {
+        display: none;
+    }
 
+    .print-invisible > * {
+        display: none;
+    }
 
-label {
-    margin: 10px;
+    body ol .draggable {
+        margin: 0 auto;
+        line-height: 1.5;
+        height: auto;
+        list-style-type: unset;
+        font-weight: 800;
+        font-size: 20px;
+    }
 }
