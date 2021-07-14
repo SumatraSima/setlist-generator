@@ -100,9 +100,9 @@ function getLineSeparator(content = '') {
 function download(e) {
     const filename = '' + document.getElementById('setlist-file-name-input').value + '.txt';
     e.preventDefault();
-    const list = document.getElementById('setlist');
+    const songTitleNodes = document.querySelectorAll('.song-title');
     let text = '';
-    for (const child of list.children) {
+    for (const child of songTitleNodes) {
         text += child.textContent + getLineSeparator(text);
     }
     const element = document.createElement('a');
@@ -118,23 +118,89 @@ function download(e) {
     document.body.removeChild(element);
 }
 
-function addNewSong(songTitle) {
-    const li = document.createElement('li');
-    const attr = document.createAttribute('draggable');
-    const ol = document.querySelector('ol');
-    li.classList.add('draggable');
-    if (songTitle.startsWith('---')) {
-        li.classList.add('numbering-exclude')
+function deleteSongFromList() {
+    this.closest('li').remove();
+}
+
+function createButton() {
+    return document.createElement('button');
+}
+
+function moveSongUp() {
+    const listElement = this.closest('li');
+    if (listElement.previousElementSibling) {
+        listElement.parentNode.insertBefore(listElement, listElement.previousElementSibling);
     }
+}
+
+function moveSongDown() {
+    const listElement = this.closest('li');
+    if (listElement.nextElementSibling) {
+        listElement.parentNode.insertBefore(listElement.nextElementSibling, listElement);
+    }
+}
+
+function createDeleteNode(parent) {
+    const deleteNode = createButton();
+    deleteNode.classList.add('material-icons', 'delete-song-button', 'print-invisible', 'list-item-buttons');
+    deleteNode.appendChild(document.createTextNode('clear'));
+    deleteNode.addEventListener('click', deleteSongFromList)
+    parent.appendChild(deleteNode);
+}
+
+function createUpAndDownNode(parent) {
+    const upNode = createButton();
+    upNode.classList.add('material-icons', 'move-song-up-button', 'print-invisible', 'list-item-buttons');
+    upNode.appendChild(document.createTextNode('expand_less'));
+    upNode.addEventListener('click', moveSongUp)
+    parent.appendChild(upNode);
+    const downNode = createButton();
+    downNode.classList.add('material-icons', 'move-song-down-button', 'print-invisible', 'list-item-buttons');
+    downNode.appendChild(document.createTextNode('expand_more'));
+    downNode.addEventListener('click', moveSongDown)
+    parent.appendChild(downNode);
+
+}
+
+function createSongTitleNode(parent, songTitle) {
+    const songNode = document.createElement('span');
+    const attr = document.createAttribute('draggable');
     attr.value = 'true';
-    li.setAttributeNode(attr);
-    li.appendChild(document.createTextNode(songTitle));
-    ol.appendChild(li);
-    addDragAndDropHandlers(li);
+    songNode.setAttributeNode(attr);
+    songNode.classList.add('draggable', 'song-title');
+    const textNode = document.createTextNode(songTitle);
+    songNode.appendChild(textNode);
+    parent.appendChild(songNode);
+}
+
+function createListItemContainer(parent) {
+    const container = document.createElement('div');
+    container.classList.add('list-item-container');
+    parent.appendChild(container);
+    return container;
+}
+
+function createListElement(songTitle) {
+    const newListElement = document.createElement('li');
+    if (songTitle.startsWith('---')) {
+        newListElement.classList.add('numbering-exclude')
+    }
+    const container = createListItemContainer(newListElement);
+    createSongTitleNode(container, songTitle);
+    createUpAndDownNode(container);
+    createDeleteNode(container);
+    return newListElement;
+}
+
+function addNewSong(songTitle) {
+    const listNode = document.querySelector('ol');
+    const newListElement = createListElement(songTitle);
+    listNode.appendChild(newListElement);
+    addDragAndDropHandlers(newListElement);
 }
 
 document.getElementById('setlist-name-input').addEventListener("keyup", function (event) {
-    let inputValue = event.target.value;
+    const inputValue = event.target.value;
     if (event.code === 'Enter' && inputValue !== '') {
         addNewSong(inputValue);
         event.target.value = '';

@@ -4,7 +4,13 @@ body {
     color: red;
 }
 
- h1 {
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
     text-align: center;
     font-family: 'Arial', sans-serif;
     font-size: 50px;
@@ -44,6 +50,9 @@ body {
 .setlist-container {
     display: flex;
     justify-content: center;
+    background-color: rgba(74, 72, 72, 0.9);
+    padding-right: 20px;
+    padding-left: 10px;
 }
 
 [draggable] {
@@ -64,20 +73,39 @@ body {
     opacity: 0.4;
 }
 
-.draggable.over {
+li.over .draggable {
     border-top: 2px solid red;
 }
+
+li:last-child .move-song-down-button {
+    visibility: hidden;
+}
+
+li:first-child .move-song-up-button {
+    visibility: hidden;
+}
+
+/*TODO hacky -> restyle list to table or flex columns*/
+.move-song-up-button {
+    margin-left: auto;
+}
+
+.list-item-container {
+    display: flex;
+}
+
 
 @media print {
     body {
         color: black;
     }
+
     .print-invisible {
         display: none;
     }
 
-    .print-invisible > * {
-        display: none;
+    .print-invisible {
+        display: none !important;
     }
 
     body ol .draggable {

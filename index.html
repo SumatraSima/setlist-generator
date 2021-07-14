@@ -5,37 +5,41 @@
     <meta charset="UTF-8">
     <title>Motörbeer Setlist Generator</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
     <script src="main.js" async></script>
 </head>
 
 <body>
 <h1 class="print-invisible">Motörbeer Setlist Generator</h1>
-<div class="setlist-upload-download-section print-invisible">
-    <div>
-        <button type="button" id="select-file-button">
-            Import Setlist  from file...
-        </button>
-        <input type="file" id="file-input"/>
+<div class="wrapper">
+    <div class="setlist-upload-download-section print-invisible">
+        <div>
+            <button type="button" id="select-file-button">
+                Import Setlist from file...
+            </button>
+            <input type="file" id="file-input"/>
+        </div>
+        <div>
+            <form id="download-form">
+                <label for="setlist-file-name-input" style="display: block">
+                    Specify a name for the setlist
+                </label>
+                <input id="setlist-file-name-input" type="text" placeholder="Give a name for the setlist file"/>
+                <input type="submit" value="Download">
+            </form>
+        </div>
     </div>
-    <div>
-        <form id="download-form">
-            <label for="setlist-file-name-input" style="display: block">
-                Specify a name for the setlist
-            </label>
-            <input id="setlist-file-name-input" type="text" placeholder="Give a name for the setlist file"/>
-            <input type="submit" value="Download">
-        </form>
+    <div class="song-add-section print-invisible">
+        <label for="setlist-name-input">
+            Add songs to the setlist here
+        </label>
+        <input id="setlist-name-input" type="text" placeholder="Add items in your list">
     </div>
-</div>
-<div class="song-add-section print-invisible">
-    <label for="setlist-name-input">
-        Add songs to the setlist here
-    </label>
-    <input id="setlist-name-input" type="text" placeholder="Add items in your list">
-</div>
-<div class="setlist-container">
-    <ol id="setlist">
-    </ol>
+    <div class="setlist-container">
+        <ol id="setlist">
+        </ol>
+    </div>
 </div>
 </body>
 </html>
